@@ -1,0 +1,8 @@
+{
+    "version": "1.0",
+    "ico": "./resources/img/<ICON>.png",
+    "company_name": "ChillAspect",
+    "product_name": "Twitch LED Emote Wall",
+    "description": "Animated Twitch Emote LED Wall",
+    "main_script": "MainWindow.py"
+}

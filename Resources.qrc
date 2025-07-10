@@ -2,6 +2,14 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
 	<file>version.json</file>
+	<file>resources\img\lul.png</file>
+	<file>resources\img\icons\arrow-left.svg</file>
+	<file>resources\img\icons\arrow-right.svg</file>
+	<file>resources\img\icons\clock.svg</file>
+	<file>resources\img\icons\grid.svg</file>
+	<file>resources\img\icons\monitor.svg</file>
+	<file>resources\img\icons\smile.svg</file>
+	<file>resources\img\icons\twitch.svg</file>
 	<file>resources\ui\gui.ui</file>
 </qresource>
 </RCC>

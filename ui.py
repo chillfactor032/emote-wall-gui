@@ -15,11 +15,11 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QFormLayout, QFrame,
-    QGridLayout, QGroupBox, QHBoxLayout, QLCDNumber,
-    QLabel, QLineEdit, QMainWindow, QMenuBar,
-    QSizePolicy, QSpacerItem, QStackedWidget, QStatusBar,
-    QToolButton, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGridLayout,
+    QGroupBox, QHBoxLayout, QLCDNumber, QLabel,
+    QLineEdit, QMainWindow, QMenuBar, QSizePolicy,
+    QSpacerItem, QStackedWidget, QStatusBar, QToolButton,
+    QVBoxLayout, QWidget)
 import Resources_rc
 
 class Ui_MainWindow(object):
@@ -27,6 +27,7 @@ class Ui_MainWindow(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(800, 480)
+        MainWindow.setStyleSheet(u"")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.horizontalLayout = QHBoxLayout(self.centralwidget)
@@ -39,29 +40,39 @@ class Ui_MainWindow(object):
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.groupBox_2 = QGroupBox(self.widget)
         self.groupBox_2.setObjectName(u"groupBox_2")
-        self.formLayout_2 = QFormLayout(self.groupBox_2)
-        self.formLayout_2.setObjectName(u"formLayout_2")
+        self.verticalLayout_3 = QVBoxLayout(self.groupBox_2)
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.widget_9 = QWidget(self.groupBox_2)
         self.widget_9.setObjectName(u"widget_9")
+        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.widget_9.sizePolicy().hasHeightForWidth())
+        self.widget_9.setSizePolicy(sizePolicy)
         font = QFont()
         font.setStyleStrategy(QFont.PreferDefault)
         self.widget_9.setFont(font)
-        self.formLayout = QFormLayout(self.widget_9)
-        self.formLayout.setObjectName(u"formLayout")
-        self.formLayout.setFormAlignment(Qt.AlignCenter)
-        self.formLayout.setContentsMargins(0, -1, 6, -1)
-        self.widget_4 = QWidget(self.widget_9)
+        self.horizontalLayout_10 = QHBoxLayout(self.widget_9)
+        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.horizontalLayout_10.setContentsMargins(0, 0, 0, 0)
+        self.widget_5 = QWidget(self.widget_9)
+        self.widget_5.setObjectName(u"widget_5")
+        self.verticalLayout_2 = QVBoxLayout(self.widget_5)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.widget_4 = QWidget(self.widget_5)
         self.widget_4.setObjectName(u"widget_4")
         self.horizontalLayout_4 = QHBoxLayout(self.widget_4)
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.label_3 = QLabel(self.widget_4)
         self.label_3.setObjectName(u"label_3")
-        sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_3.sizePolicy().hasHeightForWidth())
-        self.label_3.setSizePolicy(sizePolicy)
+        sizePolicy1 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.label_3.sizePolicy().hasHeightForWidth())
+        self.label_3.setSizePolicy(sizePolicy1)
         self.label_3.setMinimumSize(QSize(30, 30))
+        self.label_3.setStyleSheet(u"")
         self.label_3.setPixmap(QPixmap(u":/resources/img/icons/twitch.svg"))
         self.label_3.setScaledContents(True)
 
@@ -76,34 +87,17 @@ class Ui_MainWindow(object):
         self.horizontalLayout_4.addWidget(self.label_4)
 
 
-        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.widget_4)
+        self.verticalLayout_2.addWidget(self.widget_4)
 
-        self.widget_6 = QWidget(self.widget_9)
-        self.widget_6.setObjectName(u"widget_6")
-        self.gridLayout_4 = QGridLayout(self.widget_6)
-        self.gridLayout_4.setObjectName(u"gridLayout_4")
-        self.twitch_channel_input = QLineEdit(self.widget_6)
-        self.twitch_channel_input.setObjectName(u"twitch_channel_input")
-        self.twitch_channel_input.setMinimumSize(QSize(0, 40))
-        font2 = QFont()
-        font2.setPointSize(13)
-        self.twitch_channel_input.setFont(font2)
-        self.twitch_channel_input.setEchoMode(QLineEdit.Normal)
-
-        self.gridLayout_4.addWidget(self.twitch_channel_input, 0, 0, 1, 1)
-
-
-        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.widget_6)
-
-        self.widget_8 = QWidget(self.widget_9)
+        self.widget_8 = QWidget(self.widget_5)
         self.widget_8.setObjectName(u"widget_8")
         self.horizontalLayout_3 = QHBoxLayout(self.widget_8)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.horizontalLayout_3.setContentsMargins(-1, 9, -1, 9)
         self.label_6 = QLabel(self.widget_8)
         self.label_6.setObjectName(u"label_6")
-        sizePolicy.setHeightForWidth(self.label_6.sizePolicy().hasHeightForWidth())
-        self.label_6.setSizePolicy(sizePolicy)
+        sizePolicy1.setHeightForWidth(self.label_6.sizePolicy().hasHeightForWidth())
+        self.label_6.setSizePolicy(sizePolicy1)
         self.label_6.setMinimumSize(QSize(30, 30))
         self.label_6.setMaximumSize(QSize(30, 30))
         self.label_6.setPixmap(QPixmap(u":/resources/img/icons/smile.svg"))
@@ -118,12 +112,85 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.addWidget(self.label_7)
 
 
-        self.formLayout.setWidget(1, QFormLayout.LabelRole, self.widget_8)
+        self.verticalLayout_2.addWidget(self.widget_8)
 
-        self.widget_7 = QWidget(self.widget_9)
+        self.widget_12 = QWidget(self.widget_5)
+        self.widget_12.setObjectName(u"widget_12")
+        self.horizontalLayout_9 = QHBoxLayout(self.widget_12)
+        self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
+        self.label_11 = QLabel(self.widget_12)
+        self.label_11.setObjectName(u"label_11")
+        sizePolicy1.setHeightForWidth(self.label_11.sizePolicy().hasHeightForWidth())
+        self.label_11.setSizePolicy(sizePolicy1)
+        self.label_11.setMinimumSize(QSize(30, 30))
+        self.label_11.setMaximumSize(QSize(30, 30))
+        self.label_11.setPixmap(QPixmap(u":/resources/img/icons/monitor.svg"))
+
+        self.horizontalLayout_9.addWidget(self.label_11)
+
+        self.label_12 = QLabel(self.widget_12)
+        self.label_12.setObjectName(u"label_12")
+        self.label_12.setFont(font1)
+
+        self.horizontalLayout_9.addWidget(self.label_12)
+
+
+        self.verticalLayout_2.addWidget(self.widget_12)
+
+        self.widget_10 = QWidget(self.widget_5)
+        self.widget_10.setObjectName(u"widget_10")
+        self.horizontalLayout_7 = QHBoxLayout(self.widget_10)
+        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
+        self.label_8 = QLabel(self.widget_10)
+        self.label_8.setObjectName(u"label_8")
+        sizePolicy1.setHeightForWidth(self.label_8.sizePolicy().hasHeightForWidth())
+        self.label_8.setSizePolicy(sizePolicy1)
+        self.label_8.setMinimumSize(QSize(30, 30))
+        self.label_8.setMaximumSize(QSize(30, 30))
+        self.label_8.setPixmap(QPixmap(u":/resources/img/icons/clock.svg"))
+
+        self.horizontalLayout_7.addWidget(self.label_8)
+
+        self.label_9 = QLabel(self.widget_10)
+        self.label_9.setObjectName(u"label_9")
+        self.label_9.setFont(font1)
+
+        self.horizontalLayout_7.addWidget(self.label_9)
+
+
+        self.verticalLayout_2.addWidget(self.widget_10)
+
+
+        self.horizontalLayout_10.addWidget(self.widget_5)
+
+        self.widget_13 = QWidget(self.widget_9)
+        self.widget_13.setObjectName(u"widget_13")
+        self.verticalLayout_4 = QVBoxLayout(self.widget_13)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.widget_6 = QWidget(self.widget_13)
+        self.widget_6.setObjectName(u"widget_6")
+        self.gridLayout_4 = QGridLayout(self.widget_6)
+        self.gridLayout_4.setObjectName(u"gridLayout_4")
+        self.gridLayout_4.setContentsMargins(0, -1, 0, -1)
+        self.twitch_channel_input = QLineEdit(self.widget_6)
+        self.twitch_channel_input.setObjectName(u"twitch_channel_input")
+        self.twitch_channel_input.setMinimumSize(QSize(0, 40))
+        font2 = QFont()
+        font2.setPointSize(13)
+        self.twitch_channel_input.setFont(font2)
+        self.twitch_channel_input.setEchoMode(QLineEdit.Normal)
+
+        self.gridLayout_4.addWidget(self.twitch_channel_input, 0, 0, 1, 1)
+
+
+        self.verticalLayout_4.addWidget(self.widget_6)
+
+        self.widget_7 = QWidget(self.widget_13)
         self.widget_7.setObjectName(u"widget_7")
         self.horizontalLayout_5 = QHBoxLayout(self.widget_7)
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.horizontalLayout_5.setContentsMargins(0, -1, 0, -1)
         self.buffer_left_button = QToolButton(self.widget_7)
         self.buffer_left_button.setObjectName(u"buffer_left_button")
         self.buffer_left_button.setMinimumSize(QSize(40, 40))
@@ -154,35 +221,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_5.addWidget(self.buffer_right_button)
 
 
-        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.widget_7)
+        self.verticalLayout_4.addWidget(self.widget_7)
 
-        self.widget_12 = QWidget(self.widget_9)
-        self.widget_12.setObjectName(u"widget_12")
-        self.horizontalLayout_9 = QHBoxLayout(self.widget_12)
-        self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
-        self.label_11 = QLabel(self.widget_12)
-        self.label_11.setObjectName(u"label_11")
-        sizePolicy.setHeightForWidth(self.label_11.sizePolicy().hasHeightForWidth())
-        self.label_11.setSizePolicy(sizePolicy)
-        self.label_11.setMinimumSize(QSize(30, 30))
-        self.label_11.setMaximumSize(QSize(30, 30))
-        self.label_11.setPixmap(QPixmap(u":/resources/img/icons/monitor.svg"))
-
-        self.horizontalLayout_9.addWidget(self.label_11)
-
-        self.label_12 = QLabel(self.widget_12)
-        self.label_12.setObjectName(u"label_12")
-        self.label_12.setFont(font1)
-
-        self.horizontalLayout_9.addWidget(self.label_12)
-
-
-        self.formLayout.setWidget(2, QFormLayout.LabelRole, self.widget_12)
-
-        self.widget_13 = QWidget(self.widget_9)
-        self.widget_13.setObjectName(u"widget_13")
-        self.gridLayout_5 = QGridLayout(self.widget_13)
-        self.gridLayout_5.setObjectName(u"gridLayout_5")
         self.mode_combo = QComboBox(self.widget_13)
         self.mode_combo.addItem("")
         self.mode_combo.addItem("")
@@ -193,38 +233,13 @@ class Ui_MainWindow(object):
         font3.setPointSize(16)
         self.mode_combo.setFont(font3)
 
-        self.gridLayout_5.addWidget(self.mode_combo, 0, 0, 1, 1)
+        self.verticalLayout_4.addWidget(self.mode_combo)
 
-
-        self.formLayout.setWidget(2, QFormLayout.FieldRole, self.widget_13)
-
-        self.widget_10 = QWidget(self.widget_9)
-        self.widget_10.setObjectName(u"widget_10")
-        self.horizontalLayout_7 = QHBoxLayout(self.widget_10)
-        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
-        self.label_8 = QLabel(self.widget_10)
-        self.label_8.setObjectName(u"label_8")
-        sizePolicy.setHeightForWidth(self.label_8.sizePolicy().hasHeightForWidth())
-        self.label_8.setSizePolicy(sizePolicy)
-        self.label_8.setMinimumSize(QSize(30, 30))
-        self.label_8.setMaximumSize(QSize(30, 30))
-        self.label_8.setPixmap(QPixmap(u":/resources/img/icons/clock.svg"))
-
-        self.horizontalLayout_7.addWidget(self.label_8)
-
-        self.label_9 = QLabel(self.widget_10)
-        self.label_9.setObjectName(u"label_9")
-        self.label_9.setFont(font1)
-
-        self.horizontalLayout_7.addWidget(self.label_9)
-
-
-        self.formLayout.setWidget(3, QFormLayout.LabelRole, self.widget_10)
-
-        self.widget_11 = QWidget(self.widget_9)
+        self.widget_11 = QWidget(self.widget_13)
         self.widget_11.setObjectName(u"widget_11")
         self.horizontalLayout_6 = QHBoxLayout(self.widget_11)
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.horizontalLayout_6.setContentsMargins(0, -1, 0, -1)
         self.delay_left_button = QToolButton(self.widget_11)
         self.delay_left_button.setObjectName(u"delay_left_button")
         self.delay_left_button.setMinimumSize(QSize(40, 40))
@@ -251,10 +266,44 @@ class Ui_MainWindow(object):
         self.horizontalLayout_6.addWidget(self.delay_right_button)
 
 
-        self.formLayout.setWidget(3, QFormLayout.FieldRole, self.widget_11)
+        self.verticalLayout_4.addWidget(self.widget_11)
 
 
-        self.formLayout_2.setWidget(0, QFormLayout.LabelRole, self.widget_9)
+        self.horizontalLayout_10.addWidget(self.widget_13)
+
+
+        self.verticalLayout_3.addWidget(self.widget_9)
+
+        self.widget_3 = QWidget(self.groupBox_2)
+        self.widget_3.setObjectName(u"widget_3")
+        sizePolicy2 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.widget_3.sizePolicy().hasHeightForWidth())
+        self.widget_3.setSizePolicy(sizePolicy2)
+        self.horizontalLayout_8 = QHBoxLayout(self.widget_3)
+        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.horizontalLayout_8.setContentsMargins(-1, 0, 0, 0)
+        self.horizontalSpacer_3 = QSpacerItem(262, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_8.addItem(self.horizontalSpacer_3)
+
+        self.save_button = QToolButton(self.widget_3)
+        self.save_button.setObjectName(u"save_button")
+        sizePolicy1.setHeightForWidth(self.save_button.sizePolicy().hasHeightForWidth())
+        self.save_button.setSizePolicy(sizePolicy1)
+        self.save_button.setMinimumSize(QSize(40, 40))
+        self.save_button.setFont(font3)
+        icon2 = QIcon()
+        icon2.addFile(u":/resources/img/icons/save.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.save_button.setIcon(icon2)
+        self.save_button.setIconSize(QSize(32, 32))
+        self.save_button.setToolButtonStyle(Qt.ToolButtonIconOnly)
+
+        self.horizontalLayout_8.addWidget(self.save_button)
+
+
+        self.verticalLayout_3.addWidget(self.widget_3)
 
 
         self.verticalLayout.addWidget(self.groupBox_2)
@@ -265,9 +314,10 @@ class Ui_MainWindow(object):
         self.groupBox_3.setMaximumSize(QSize(16777215, 100))
         self.horizontalLayout_2 = QHBoxLayout(self.groupBox_3)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.horizontalLayout_2.setContentsMargins(-1, -1, 9, -1)
         self.cycle_left_button = QToolButton(self.groupBox_3)
         self.cycle_left_button.setObjectName(u"cycle_left_button")
-        self.cycle_left_button.setMinimumSize(QSize(50, 50))
+        self.cycle_left_button.setMinimumSize(QSize(75, 50))
         self.cycle_left_button.setIcon(icon)
         self.cycle_left_button.setIconSize(QSize(40, 40))
 
@@ -280,9 +330,9 @@ class Ui_MainWindow(object):
         self.preview_screen_button = QToolButton(self.groupBox_3)
         self.preview_screen_button.setObjectName(u"preview_screen_button")
         self.preview_screen_button.setMinimumSize(QSize(50, 50))
-        icon2 = QIcon()
-        icon2.addFile(u":/resources/img/icons/grid.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.preview_screen_button.setIcon(icon2)
+        icon3 = QIcon()
+        icon3.addFile(u":/resources/img/icons/grid.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.preview_screen_button.setIcon(icon3)
         self.preview_screen_button.setIconSize(QSize(40, 40))
 
         self.horizontalLayout_2.addWidget(self.preview_screen_button)
@@ -293,7 +343,7 @@ class Ui_MainWindow(object):
 
         self.cycle_right_button = QToolButton(self.groupBox_3)
         self.cycle_right_button.setObjectName(u"cycle_right_button")
-        self.cycle_right_button.setMinimumSize(QSize(50, 50))
+        self.cycle_right_button.setMinimumSize(QSize(75, 50))
         self.cycle_right_button.setIcon(icon1)
         self.cycle_right_button.setIconSize(QSize(40, 40))
 
@@ -326,11 +376,11 @@ class Ui_MainWindow(object):
         self.gridLayout_6.setObjectName(u"gridLayout_6")
         self.preview_emote_label = QLabel(self.groupBox)
         self.preview_emote_label.setObjectName(u"preview_emote_label")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.preview_emote_label.sizePolicy().hasHeightForWidth())
-        self.preview_emote_label.setSizePolicy(sizePolicy1)
+        sizePolicy3 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.preview_emote_label.sizePolicy().hasHeightForWidth())
+        self.preview_emote_label.setSizePolicy(sizePolicy3)
         self.preview_emote_label.setPixmap(QPixmap(u":/resources/img/lul.png"))
         self.preview_emote_label.setScaledContents(True)
         self.preview_emote_label.setAlignment(Qt.AlignCenter)
@@ -352,65 +402,65 @@ class Ui_MainWindow(object):
         self.gridLayout_7.setObjectName(u"gridLayout_7")
         self.toolButton_16 = QToolButton(self.select_emote_panel)
         self.toolButton_16.setObjectName(u"toolButton_16")
-        icon3 = QIcon()
-        icon3.addFile(u":/resources/img/lul.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.toolButton_16.setIcon(icon3)
+        icon4 = QIcon()
+        icon4.addFile(u":/resources/img/lul.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.toolButton_16.setIcon(icon4)
         self.toolButton_16.setIconSize(QSize(96, 96))
 
         self.gridLayout_7.addWidget(self.toolButton_16, 0, 0, 1, 1)
 
         self.toolButton_14 = QToolButton(self.select_emote_panel)
         self.toolButton_14.setObjectName(u"toolButton_14")
-        self.toolButton_14.setIcon(icon3)
+        self.toolButton_14.setIcon(icon4)
         self.toolButton_14.setIconSize(QSize(96, 96))
 
         self.gridLayout_7.addWidget(self.toolButton_14, 0, 1, 1, 1)
 
         self.toolButton_15 = QToolButton(self.select_emote_panel)
         self.toolButton_15.setObjectName(u"toolButton_15")
-        self.toolButton_15.setIcon(icon3)
+        self.toolButton_15.setIcon(icon4)
         self.toolButton_15.setIconSize(QSize(96, 96))
 
         self.gridLayout_7.addWidget(self.toolButton_15, 0, 2, 1, 1)
 
         self.toolButton_11 = QToolButton(self.select_emote_panel)
         self.toolButton_11.setObjectName(u"toolButton_11")
-        self.toolButton_11.setIcon(icon3)
+        self.toolButton_11.setIcon(icon4)
         self.toolButton_11.setIconSize(QSize(96, 96))
 
         self.gridLayout_7.addWidget(self.toolButton_11, 1, 0, 1, 1)
 
         self.toolButton_12 = QToolButton(self.select_emote_panel)
         self.toolButton_12.setObjectName(u"toolButton_12")
-        self.toolButton_12.setIcon(icon3)
+        self.toolButton_12.setIcon(icon4)
         self.toolButton_12.setIconSize(QSize(96, 96))
 
         self.gridLayout_7.addWidget(self.toolButton_12, 1, 1, 1, 1)
 
         self.toolButton_8 = QToolButton(self.select_emote_panel)
         self.toolButton_8.setObjectName(u"toolButton_8")
-        self.toolButton_8.setIcon(icon3)
+        self.toolButton_8.setIcon(icon4)
         self.toolButton_8.setIconSize(QSize(96, 96))
 
         self.gridLayout_7.addWidget(self.toolButton_8, 1, 2, 1, 1)
 
         self.toolButton_10 = QToolButton(self.select_emote_panel)
         self.toolButton_10.setObjectName(u"toolButton_10")
-        self.toolButton_10.setIcon(icon3)
+        self.toolButton_10.setIcon(icon4)
         self.toolButton_10.setIconSize(QSize(96, 96))
 
         self.gridLayout_7.addWidget(self.toolButton_10, 2, 0, 1, 1)
 
         self.toolButton_13 = QToolButton(self.select_emote_panel)
         self.toolButton_13.setObjectName(u"toolButton_13")
-        self.toolButton_13.setIcon(icon3)
+        self.toolButton_13.setIcon(icon4)
         self.toolButton_13.setIconSize(QSize(96, 96))
 
         self.gridLayout_7.addWidget(self.toolButton_13, 2, 1, 1, 1)
 
         self.toolButton_9 = QToolButton(self.select_emote_panel)
         self.toolButton_9.setObjectName(u"toolButton_9")
-        self.toolButton_9.setIcon(icon3)
+        self.toolButton_9.setIcon(icon4)
         self.toolButton_9.setIconSize(QSize(96, 96))
 
         self.gridLayout_7.addWidget(self.toolButton_9, 2, 2, 1, 1)
@@ -436,7 +486,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stacked_widget.setCurrentIndex(1)
+        self.stacked_widget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -447,21 +497,22 @@ class Ui_MainWindow(object):
         self.groupBox_2.setTitle(QCoreApplication.translate("MainWindow", u"Settings", None))
         self.label_3.setText("")
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Channel", None))
-        self.twitch_channel_input.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Channel Name", None))
         self.label_6.setText("")
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"Buffer Size", None))
-        self.buffer_left_button.setText(QCoreApplication.translate("MainWindow", u"...", None))
-        self.buffer_right_button.setText(QCoreApplication.translate("MainWindow", u"...", None))
         self.label_11.setText("")
         self.label_12.setText(QCoreApplication.translate("MainWindow", u"Mode", None))
+        self.label_8.setText("")
+        self.label_9.setText(QCoreApplication.translate("MainWindow", u"Delay", None))
+        self.twitch_channel_input.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Channel Name", None))
+        self.buffer_left_button.setText(QCoreApplication.translate("MainWindow", u"...", None))
+        self.buffer_right_button.setText(QCoreApplication.translate("MainWindow", u"...", None))
         self.mode_combo.setItemText(0, QCoreApplication.translate("MainWindow", u"Auto Cycle", None))
         self.mode_combo.setItemText(1, QCoreApplication.translate("MainWindow", u"Last", None))
         self.mode_combo.setItemText(2, QCoreApplication.translate("MainWindow", u"Manual", None))
 
-        self.label_8.setText("")
-        self.label_9.setText(QCoreApplication.translate("MainWindow", u"Delay", None))
         self.delay_left_button.setText(QCoreApplication.translate("MainWindow", u"...", None))
         self.delay_right_button.setText(QCoreApplication.translate("MainWindow", u"...", None))
+        self.save_button.setText(QCoreApplication.translate("MainWindow", u"Save", None))
         self.groupBox_3.setTitle(QCoreApplication.translate("MainWindow", u"Control", None))
         self.cycle_left_button.setText(QCoreApplication.translate("MainWindow", u"...", None))
         self.preview_screen_button.setText(QCoreApplication.translate("MainWindow", u"...", None))

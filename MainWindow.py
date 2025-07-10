@@ -35,6 +35,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         #Load UI Components
         self.setupUi(self)
         
+        
+
         #Read Version File From Resources
         version_file = QFile(":version.json")
         version_file.open(QFile.ReadOnly)
@@ -53,6 +55,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.ini_path = os.path.join(self.config_dir, f"{self.project_name}.ini").replace("\\", "/")
         self.settings = QSettings(self.ini_path, QSettings.IniFormat)
 
+        # Variables
+        self.delay_secs = int(self.settings.value("delay_secs", "10"))
+        self.emote_buffer_size = int(self.settings.value("emote_buffer_size", "15"))
+        self.twitch_channel_name = self.settings.value("twitch_channel_name", "")
+        self.twitch_api_key = self.settings.value("twitch_bot_api_key", "")
+        self.display_mode = self.settings.value("display_mode", "Auto Cycle")
+
         #Set window Icon
         default_icon_pixmap = QStyle.StandardPixmap.SP_FileDialogListView
         pc_icon_pixmap = QPixmap(":resources/img/pc_icon.ico")
@@ -65,22 +74,65 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         
         # Get Icons
         self.grid_icon_pixmap = QPixmap(":resources/img/icons/grid.svg")
+        self.grid_icon_pixmap.scaledToHeight(40)
+        self.grid_icon_pixmap.scaledToWidth(40)
         self.grid_icon = QIcon(self.grid_icon_pixmap)
         self.eye_icon_pixmap = QPixmap(":resources/img/icons/eye.svg")
         self.eye_icon = QIcon(self.eye_icon_pixmap)
 
         #Setup Button Signals
         # Button/Menu Signals Go Here
+        self.save_button.clicked.connect(self.save_clicked)
         self.preview_screen_button.clicked.connect(self.preview_button_clicked)
+        self.delay_left_button.clicked.connect(lambda : self.modify_delay(-1))
+        self.delay_right_button.clicked.connect(lambda : self.modify_delay(1))
+        self.buffer_left_button.clicked.connect(lambda : self.modify_buffer(-1))
+        self.buffer_right_button.clicked.connect(lambda : self.modify_buffer(1))
 
-        #Finally, Show the UI
+        #Set UI Fields
         self.stacked_widget.setCurrentIndex(0)
+        self.delay_lcd.display(str(self.delay_secs))
+        self.buffer_lcd.display(str(self.emote_buffer_size))
+        self.twitch_channel_input.setText(self.twitch_channel_name)
+        mode_index = self.mode_combo.findText(self.display_mode)
+        if mode_index == -1:
+            self.mode_combo.setCurrentIndex(0)
+            self.display_mode = self.mode_combo.currentText()
+        else:
+            self.mode_combo.setCurrentIndex(mode_index)
+        self.save_button.setFocus()
+        
+        #Finally, Show the UI
         geometry = self.settings.value(f"{self.project_name}/geometry")
         window_state = self.settings.value(f"{self.project_name}/windowState")
         if(geometry and window_state):
             self.restoreGeometry(geometry) 
             self.restoreState(window_state)
         self.show()
+
+    def save_clicked(self):
+        self.delay_secs = self.delay_lcd.intValue()
+        self.emote_buffer_size = self.buffer_lcd.intValue()
+        self.twitch_channel_name = self.twitch_channel_input.text()
+        self.display_mode = self.mode_combo.currentText()
+        self.save_fields()
+
+
+    def save_fields(self):
+        self.settings.setValue("delay_secs", str(self.delay_secs))
+        self.settings.setValue("emote_buffer_size", str(self.emote_buffer_size))
+        self.settings.setValue("twitch_channel_name", str(self.twitch_channel_name))
+        self.settings.setValue("twitch_bot_api_key", str(self.twitch_api_key))
+        self.settings.setValue("display_mode", str(self.display_mode))
+        self.settings.sync()
+
+    def modify_delay(self, amount=0):
+        self.delay_secs += amount
+        self.delay_lcd.display(str(self.delay_secs))
+
+    def modify_buffer(self, amount=0):
+        self.emote_buffer_size += amount
+        self.buffer_lcd.display(str(self.emote_buffer_size))
 
     def preview_button_clicked(self):
         cur = (self.stacked_widget.currentIndex() + 1) % self.stacked_widget.count()
@@ -93,6 +145,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     # App is closing, cleanup
     def closeEvent(self, evt):
+        # Save values
+        self.save_fields()
+
         # Remember the size and position of the GUI
         self.settings.setValue(f"{self.project_name}/geometry", self.saveGeometry())
         self.settings.setValue(f"{self.project_name}/windowState", self.saveState())

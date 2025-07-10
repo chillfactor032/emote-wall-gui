@@ -7,7 +7,7 @@ from enum import Enum
 
 # PySide6 Imports
 from PySide6.QtWidgets import QApplication, QMainWindow, QStyle
-from PySide6.QtCore import QSettings, QFile, QTextStream, QStandardPaths
+from PySide6.QtCore import QSettings, QFile, QTextStream, QStandardPaths, QSize
 from PySide6.QtGui import QPixmap, QIcon
 
 # Import resources and UI components
@@ -63,16 +63,33 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             self.setWindowIcon(default_icon)
         
+        # Get Icons
+        self.grid_icon_pixmap = QPixmap(":resources/img/icons/grid.svg")
+        self.grid_icon = QIcon(self.grid_icon_pixmap)
+        self.eye_icon_pixmap = QPixmap(":resources/img/icons/eye.svg")
+        self.eye_icon = QIcon(self.eye_icon_pixmap)
+
         #Setup Button Signals
         # Button/Menu Signals Go Here
-        
+        self.preview_screen_button.clicked.connect(self.preview_button_clicked)
+
         #Finally, Show the UI
+        self.stacked_widget.setCurrentIndex(0)
         geometry = self.settings.value(f"{self.project_name}/geometry")
         window_state = self.settings.value(f"{self.project_name}/windowState")
         if(geometry and window_state):
             self.restoreGeometry(geometry) 
             self.restoreState(window_state)
         self.show()
+
+    def preview_button_clicked(self):
+        cur = (self.stacked_widget.currentIndex() + 1) % self.stacked_widget.count()
+        self.stacked_widget.setCurrentIndex(cur)
+        if self.stacked_widget.currentWidget() == self.preview_widget:
+            self.preview_screen_button.setIcon(self.grid_icon)
+        else:
+            self.preview_screen_button.setIcon(self.eye_icon)
+        self.preview_screen_button.setIconSize(QSize(40,40))
 
     # App is closing, cleanup
     def closeEvent(self, evt):
@@ -96,5 +113,6 @@ if __name__ == "__main__":
     app.setOrganizationName(org_name)
     app.setApplicationName(app_name)
     app.setApplicationVersion(version)
+    app.setStyle("Fusion")
     window = MainWindow()
     sys.exit(app.exec())

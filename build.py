@@ -306,7 +306,7 @@ print("Compiling Resources")
 #Create Resources.qrc if it doesn't exist
 generateQRC(resource_file, "resources")
 
-resource_dest = "Resources.py"
+resource_dest = "Resources_rc.py"
 if(compileResources(resource_file, resource_dest)):
     print(f"> File: {resource_file} to {resource_dest}")
 else:

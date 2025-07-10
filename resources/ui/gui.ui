@@ -106,7 +106,7 @@
               <widget class="QWidget" name="widget_6" native="true">
                <layout class="QGridLayout" name="gridLayout_4">
                 <item row="0" column="0">
-                 <widget class="QLineEdit" name="lineEdit_2">
+                 <widget class="QLineEdit" name="twitch_channel_input">
                   <property name="minimumSize">
                    <size>
                     <width>0</width>
@@ -129,7 +129,7 @@
                </layout>
               </widget>
              </item>
-             <item row="2" column="0">
+             <item row="1" column="0">
               <widget class="QWidget" name="widget_8" native="true">
                <layout class="QHBoxLayout" name="horizontalLayout_3">
                 <property name="topMargin">
@@ -184,11 +184,11 @@
                </layout>
               </widget>
              </item>
-             <item row="2" column="1">
+             <item row="1" column="1">
               <widget class="QWidget" name="widget_7" native="true">
                <layout class="QHBoxLayout" name="horizontalLayout_5">
                 <item>
-                 <widget class="QToolButton" name="toolButton_5">
+                 <widget class="QToolButton" name="buffer_left_button">
                   <property name="minimumSize">
                    <size>
                     <width>40</width>
@@ -205,7 +205,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLCDNumber" name="lcdNumber">
+                 <widget class="QLCDNumber" name="buffer_lcd">
                   <property name="minimumSize">
                    <size>
                     <width>0</width>
@@ -230,7 +230,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QToolButton" name="toolButton_4">
+                 <widget class="QToolButton" name="buffer_right_button">
                   <property name="minimumSize">
                    <size>
                     <width>40</width>
@@ -249,7 +249,7 @@
                </layout>
               </widget>
              </item>
-             <item row="4" column="0">
+             <item row="2" column="0">
               <widget class="QWidget" name="widget_12" native="true">
                <layout class="QHBoxLayout" name="horizontalLayout_9">
                 <item>
@@ -295,11 +295,11 @@
                </layout>
               </widget>
              </item>
-             <item row="4" column="1">
+             <item row="2" column="1">
               <widget class="QWidget" name="widget_13" native="true">
                <layout class="QGridLayout" name="gridLayout_5">
                 <item row="0" column="0">
-                 <widget class="QComboBox" name="comboBox">
+                 <widget class="QComboBox" name="mode_combo">
                   <property name="minimumSize">
                    <size>
                     <width>0</width>
@@ -331,7 +331,7 @@
                </layout>
               </widget>
              </item>
-             <item row="6" column="0">
+             <item row="3" column="0">
               <widget class="QWidget" name="widget_10" native="true">
                <layout class="QHBoxLayout" name="horizontalLayout_7">
                 <item>
@@ -377,11 +377,11 @@
                </layout>
               </widget>
              </item>
-             <item row="6" column="1">
+             <item row="3" column="1">
               <widget class="QWidget" name="widget_11" native="true">
                <layout class="QHBoxLayout" name="horizontalLayout_6">
                 <item>
-                 <widget class="QToolButton" name="toolButton_6">
+                 <widget class="QToolButton" name="delay_left_button">
                   <property name="minimumSize">
                    <size>
                     <width>40</width>
@@ -398,7 +398,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLCDNumber" name="lcdNumber_2">
+                 <widget class="QLCDNumber" name="delay_lcd">
                   <property name="minimumSize">
                    <size>
                     <width>0</width>
@@ -423,7 +423,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QToolButton" name="toolButton_7">
+                 <widget class="QToolButton" name="delay_right_button">
                   <property name="minimumSize">
                    <size>
                     <width>40</width>
@@ -441,45 +441,6 @@
                 </item>
                </layout>
               </widget>
-             </item>
-             <item row="1" column="1">
-              <spacer name="verticalSpacer">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="3" column="0">
-              <spacer name="verticalSpacer_2">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="5" column="0">
-              <spacer name="verticalSpacer_3">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
-               </property>
-              </spacer>
              </item>
             </layout>
            </widget>
@@ -506,7 +467,7 @@
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
-           <widget class="QToolButton" name="toolButton">
+           <widget class="QToolButton" name="cycle_left_button">
             <property name="minimumSize">
              <size>
               <width>50</width>
@@ -542,7 +503,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QToolButton" name="toolButton_3">
+           <widget class="QToolButton" name="preview_screen_button">
             <property name="minimumSize">
              <size>
               <width>50</width>
@@ -578,7 +539,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QToolButton" name="toolButton_2">
+           <widget class="QToolButton" name="cycle_right_button">
             <property name="minimumSize">
              <size>
               <width>50</width>
@@ -628,11 +589,11 @@
         <number>0</number>
        </property>
        <item row="0" column="0">
-        <widget class="QStackedWidget" name="stackedWidget">
+        <widget class="QStackedWidget" name="stacked_widget">
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
-         <widget class="QWidget" name="previewPage">
+         <widget class="QWidget" name="preview_widget">
           <layout class="QGridLayout" name="gridLayout_2">
            <property name="leftMargin">
             <number>0</number>
@@ -662,7 +623,7 @@
              </property>
              <layout class="QGridLayout" name="gridLayout_6">
               <item row="0" column="0">
-               <widget class="QLabel" name="label_13">
+               <widget class="QLabel" name="preview_emote_label">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -688,7 +649,184 @@
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="page"/>
+         <widget class="QWidget" name="emote_select_widget">
+          <layout class="QGridLayout" name="gridLayout_3">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item row="0" column="0">
+            <widget class="QGroupBox" name="select_emote_panel">
+             <property name="title">
+              <string>Select Emote (1/3)</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_7">
+              <item row="0" column="0">
+               <widget class="QToolButton" name="toolButton_16">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset resource="../../Resources.qrc">
+                  <normaloff>:/resources/img/lul.png</normaloff>:/resources/img/lul.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>96</width>
+                  <height>96</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QToolButton" name="toolButton_14">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset resource="../../Resources.qrc">
+                  <normaloff>:/resources/img/lul.png</normaloff>:/resources/img/lul.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>96</width>
+                  <height>96</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QToolButton" name="toolButton_15">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset resource="../../Resources.qrc">
+                  <normaloff>:/resources/img/lul.png</normaloff>:/resources/img/lul.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>96</width>
+                  <height>96</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QToolButton" name="toolButton_11">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset resource="../../Resources.qrc">
+                  <normaloff>:/resources/img/lul.png</normaloff>:/resources/img/lul.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>96</width>
+                  <height>96</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QToolButton" name="toolButton_12">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset resource="../../Resources.qrc">
+                  <normaloff>:/resources/img/lul.png</normaloff>:/resources/img/lul.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>96</width>
+                  <height>96</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QToolButton" name="toolButton_8">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset resource="../../Resources.qrc">
+                  <normaloff>:/resources/img/lul.png</normaloff>:/resources/img/lul.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>96</width>
+                  <height>96</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QToolButton" name="toolButton_10">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset resource="../../Resources.qrc">
+                  <normaloff>:/resources/img/lul.png</normaloff>:/resources/img/lul.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>96</width>
+                  <height>96</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QToolButton" name="toolButton_13">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset resource="../../Resources.qrc">
+                  <normaloff>:/resources/img/lul.png</normaloff>:/resources/img/lul.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>96</width>
+                  <height>96</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="2">
+               <widget class="QToolButton" name="toolButton_9">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset resource="../../Resources.qrc">
+                  <normaloff>:/resources/img/lul.png</normaloff>:/resources/img/lul.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>96</width>
+                  <height>96</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
         </widget>
        </item>
       </layout>

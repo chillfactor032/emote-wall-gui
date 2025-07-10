@@ -8,10 +8,10 @@ from enum import Enum
 # PySide6 Imports
 from PySide6.QtWidgets import QApplication, QMainWindow, QStyle
 from PySide6.QtCore import QSettings, QFile, QTextStream, QStandardPaths, QSize
-from PySide6.QtGui import QPixmap, QIcon
+from PySide6.QtGui import QPixmap, QIcon, QPalette, QColor
 
 # Import resources and UI components
-import Resources
+import Resources_rc
 from ui import *
 
 #Log Levels
@@ -113,6 +113,7 @@ if __name__ == "__main__":
     app.setOrganizationName(org_name)
     app.setApplicationName(app_name)
     app.setApplicationVersion(version)
+    app.setPalette(QPalette(QColor("#19171D")))
     app.setStyle("Fusion")
     window = MainWindow()
     sys.exit(app.exec())

@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'gui.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.5.1
+## Created by: Qt User Interface Compiler version 6.9.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -44,7 +44,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.widget_9 = QWidget(self.groupBox_2)
         self.widget_9.setObjectName(u"widget_9")
-        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.widget_9.sizePolicy().hasHeightForWidth())
@@ -66,7 +66,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.label_3 = QLabel(self.widget_4)
         self.label_3.setObjectName(u"label_3")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.label_3.sizePolicy().hasHeightForWidth())
@@ -195,7 +195,7 @@ class Ui_MainWindow(object):
         self.buffer_left_button.setObjectName(u"buffer_left_button")
         self.buffer_left_button.setMinimumSize(QSize(40, 40))
         icon = QIcon()
-        icon.addFile(u":/resources/img/icons/arrow-left.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u":/resources/img/icons/arrow-left.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.buffer_left_button.setIcon(icon)
 
         self.horizontalLayout_5.addWidget(self.buffer_left_button)
@@ -207,7 +207,7 @@ class Ui_MainWindow(object):
         self.buffer_lcd.setLineWidth(1)
         self.buffer_lcd.setMidLineWidth(0)
         self.buffer_lcd.setDigitCount(2)
-        self.buffer_lcd.setProperty("intValue", 30)
+        self.buffer_lcd.setProperty(u"intValue", 30)
 
         self.horizontalLayout_5.addWidget(self.buffer_lcd)
 
@@ -215,7 +215,7 @@ class Ui_MainWindow(object):
         self.buffer_right_button.setObjectName(u"buffer_right_button")
         self.buffer_right_button.setMinimumSize(QSize(40, 40))
         icon1 = QIcon()
-        icon1.addFile(u":/resources/img/icons/arrow-right.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon1.addFile(u":/resources/img/icons/arrow-right.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.buffer_right_button.setIcon(icon1)
 
         self.horizontalLayout_5.addWidget(self.buffer_right_button)
@@ -254,7 +254,7 @@ class Ui_MainWindow(object):
         self.delay_lcd.setLineWidth(1)
         self.delay_lcd.setMidLineWidth(0)
         self.delay_lcd.setDigitCount(2)
-        self.delay_lcd.setProperty("intValue", 10)
+        self.delay_lcd.setProperty(u"intValue", 10)
 
         self.horizontalLayout_6.addWidget(self.delay_lcd)
 
@@ -276,7 +276,7 @@ class Ui_MainWindow(object):
 
         self.widget_3 = QWidget(self.groupBox_2)
         self.widget_3.setObjectName(u"widget_3")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
         sizePolicy2.setHorizontalStretch(0)
         sizePolicy2.setVerticalStretch(0)
         sizePolicy2.setHeightForWidth(self.widget_3.sizePolicy().hasHeightForWidth())
@@ -284,7 +284,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_8 = QHBoxLayout(self.widget_3)
         self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
         self.horizontalLayout_8.setContentsMargins(-1, 0, 0, 0)
-        self.horizontalSpacer_3 = QSpacerItem(262, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_3 = QSpacerItem(262, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_8.addItem(self.horizontalSpacer_3)
 
@@ -295,7 +295,7 @@ class Ui_MainWindow(object):
         self.save_button.setMinimumSize(QSize(40, 40))
         self.save_button.setFont(font3)
         icon2 = QIcon()
-        icon2.addFile(u":/resources/img/icons/save.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon2.addFile(u":/resources/img/icons/save.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.save_button.setIcon(icon2)
         self.save_button.setIconSize(QSize(32, 32))
         self.save_button.setToolButtonStyle(Qt.ToolButtonIconOnly)
@@ -323,7 +323,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_2.addWidget(self.cycle_left_button)
 
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_2.addItem(self.horizontalSpacer)
 
@@ -331,13 +331,13 @@ class Ui_MainWindow(object):
         self.preview_screen_button.setObjectName(u"preview_screen_button")
         self.preview_screen_button.setMinimumSize(QSize(50, 50))
         icon3 = QIcon()
-        icon3.addFile(u":/resources/img/icons/grid.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon3.addFile(u":/resources/img/icons/grid.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.preview_screen_button.setIcon(icon3)
         self.preview_screen_button.setIconSize(QSize(40, 40))
 
         self.horizontalLayout_2.addWidget(self.preview_screen_button)
 
-        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_2.addItem(self.horizontalSpacer_2)
 
@@ -376,7 +376,7 @@ class Ui_MainWindow(object):
         self.gridLayout_6.setObjectName(u"gridLayout_6")
         self.preview_emote_label = QLabel(self.groupBox)
         self.preview_emote_label.setObjectName(u"preview_emote_label")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
         sizePolicy3.setHorizontalStretch(0)
         sizePolicy3.setVerticalStretch(0)
         sizePolicy3.setHeightForWidth(self.preview_emote_label.sizePolicy().hasHeightForWidth())
@@ -403,7 +403,7 @@ class Ui_MainWindow(object):
         self.toolButton_16 = QToolButton(self.select_emote_panel)
         self.toolButton_16.setObjectName(u"toolButton_16")
         icon4 = QIcon()
-        icon4.addFile(u":/resources/img/lul.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon4.addFile(u":/resources/img/lul.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.toolButton_16.setIcon(icon4)
         self.toolButton_16.setIconSize(QSize(96, 96))
 

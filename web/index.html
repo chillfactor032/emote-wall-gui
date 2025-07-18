@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en" class="wa-dark wa-theme-tailspin wa-palette-vogue wa-brand-indigo">
+  <head>
+    <meta charset="UTF-8">
+    <title>Chill Emote Wall</title>
+    <link rel="icon" type="image/png" href="static/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="static/favicon.svg" />
+    <link rel="shortcut icon" href="static/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="static/apple-touch-icon.png" />
+    <link rel="manifest" href="static/site.webmanifest" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-beta.2/dist/styles/webawesome.css" />
+    <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-beta.2/dist/styles/themes/tailspin.css" />
+    <script type="module" src="https://early.webawesome.com/webawesome@3.0.0-beta.2/dist/webawesome.loader.js"></script>
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+" crossorigin="anonymous"></script>
+    <script src="static/app.js"></script>
+  </head>
+  <body>
+    <wa-page mobile-breakpoint="920">
+        <wa-drawer label="Settings" id="settings-drawer">
+            <wa-select id="display-mode-select" label="Display Mode">
+                <wa-option value="auto" selected>Auto</wa-option>
+                <wa-option value="manual">Manual</wa-option>
+                <wa-option value="last">Last</wa-option>
+            </wa-select>
+            <br />
+            <wa-input name="delay-secs-input" id="delay-secs-input" label="Delay Seconds" type="number" min="1" max="120" value="10"></wa-input>
+            <br />
+            <wa-input name="pool-size-input" id="pool-size-input" label="Emote Pool Size" type="number" min="1" max="120" value="10"></wa-input>
+            <br />
+            <wa-button variant="brand" data-drawer="close" onclick="update_settings();">Save</wa-button>
+            <wa-button slot="footer" variant="brand" data-drawer="close">Close</wa-button>
+        </wa-drawer>
+      <header slot="header" class="wa-split" stlye="background-color:#130D2B;">
+        <div class="wa-cluster">
+          <img src="static/web-app-manifest-192x192.png" style="height: 4vh;"/>
+          <span id="brand-name" class="wa-heading-m wa-desktop-only" style="color: white;">Chill Emote Wall</span>
+        </div>
+        <div class="wa-cluster wa-gap-xs">
+            <wa-button size="small" variant="brand" style="" id="settings-button">
+                <wa-icon name="gear"></wa-icon>
+            </wa-button>
+        </div>
+      </header>
+      <nav slot="navigation-header" style="border-bottom: 0;">
+        <div class="wa-flank">
+          <wa-icon id="connected-icon" name="circle-check" label="" class="connected" style=""></wa-icon>
+          <div class="wa-stack wa-gap-3xs">
+            <span id="connected-string" class="wa-heading-s">Websocket Connected</span>
+          </div>
+        </div>
+      </nav>
+      <nav slot="navigation">
+        
+      </nav>
+      <nav slot="navigation-footer">
+        
+      </nav>
+      <main class="wa-body-l">
+            <div class="wa-flank:end wa-border-radius-l wa-dark" style="background-color: var(--wa-color-surface-lowered); --content-percentage: 50%; padding: var(--wa-space-l);">
+                <div class="wa-stack" style="margin: var(--wa-space-2xl)">
+                    <h2>Current Emote</h2>
+                    <wa-divider></wa-divider>
+                    <div class="wa-cluster wa-align-items-center">
+                        <wa-button size="large" appearance="" variant="brand">
+                            <wa-icon name="backward"></wa-icon>
+                        </wa-button>
+                        <wa-button size="large" appearance="" variant="brand">
+                            <wa-icon name="play"></wa-icon>
+                        </wa-button>
+                        <wa-button size="large" appearance="" variant="brand">
+                            <wa-icon name="forward"></wa-icon>
+                        </wa-button>
+                    </div>
+                    <wa-divider></wa-divider>
+                    <wa-progress-bar value="40"></wa-progress-bar>
+                </div>
+                <div class="wa-frame" style="border-radius: var(--wa-border-radius-l); max-inline-size: 80ch">
+                    <img src="static/emotes/emotesv2_34f411f644694cf6854e5bbe225f9eb6.png" style="height: 200px;"/>
+                </div>
+            </div>
+            <wa-button variant="brand" data-drawer="close" onclick="set_connected(true);">Good</wa-button>
+            <wa-button variant="brand" data-drawer="close" onclick="set_connected(false);">Bad</wa-button>
+      </main>
+      <aside slot="aside" class="wa-desktop-only">
+        <h2 class="wa-heading-m" style="text-align: center;">Upcoming Emotes</h2>
+        <wa-card class="wa-align-items-center">
+            <img src="static/emotes/307278843.png" style="height: 100px;"/>
+        </wa-card>
+        <wa-card class="wa-align-items-center">
+            <img src="static/emotes/302715789.png" style="height: 100px;"/>
+        </wa-card>
+        <wa-card class="wa-align-items-center">
+            <img src="static/emotes/emotesv2_012e7ad9e1af444db481f0726a3231b0.png" style="height: 100px;"/>
+        </wa-card>
+        <wa-card class="wa-align-items-center">
+            <img src="static/emotes/emotesv2_604e02f11fac44f9aae0e9b6a27e25a1.png" style="height: 100px;"/>
+        </wa-card>
+      </aside>
+    </wa-page>
+
+    <style>
+        :root,
+        .wa-light,
+        .wa-dark {
+            --wa-color-brand-fill-quiet: var(--wa-color-purple-95);
+            --wa-color-brand-fill-normal: var(--wa-color-purple-90);
+            --wa-color-brand-fill-loud: var(--wa-color-purple-50);
+            --wa-color-brand-border-quiet: var(--wa-color-purple-90);
+            --wa-color-brand-border-normal: var(--wa-color-purple-80);
+            --wa-color-brand-border-loud: var(--wa-color-purple-60);
+            --wa-color-brand-on-quiet: var(--wa-color-purple-40);
+            --wa-color-brand-on-normal: var(--wa-color-purple-30);
+            --wa-color-brand-on-loud: white;
+        }
+
+      wa-page {
+        --menu-width: 15rem;
+        --aside-width: 15rem;
+      }
+      wa-page[view='desktop'] {
+        [slot*='navigation'] {
+          border-inline-end: var(--wa-border-width-s) var(--wa-border-style) var(--wa-color-surface-border);
+        }
+      }
+      wa-page[view='mobile'] {
+        --menu-width: auto;
+        --aside-width: auto;
+      }
+
+      [slot='banner'] {
+        --wa-color-text-link: var(--wa-color-neutral-on-loud);
+        background-color: var(--wa-color-neutral-fill-loud);
+      }
+      [slot='header'] {
+        --wa-link-decoration-default: none;
+        border-block-end: var(--wa-border-width-s) var(--wa-border-style) var(--wa-color-surface-border);
+        background-color: #130D2B;
+        height: 7vh;
+      }
+      [slot*='header'] a {
+        font-weight: var(--wa-font-weight-action);
+      }
+      [slot='subheader'] {
+        background-color: var(--wa-color-surface-lowered);
+        border-block-end: var(--wa-border-width-s) var(--wa-border-style) var(--wa-color-surface-border);
+      }
+      [slot='navigation-header'] {
+        border-block-end: var(--wa-border-width-s) var(--wa-border-style) var(--wa-color-surface-border);
+      }
+
+      [slot*='navigation'] a {
+        --wa-color-text-link: var(--wa-color-text-normal);
+      }
+      [slot='navigation-footer'] {
+        border-block-start: var(--wa-border-width-s) var(--wa-border-style) var(--wa-color-surface-border);
+
+        .wa-flank {
+          --flank-size: 1.25em;
+        }
+      }
+      [slot='main-header'],
+      main,
+      [slot='main-footer'] {
+        max-inline-size: 60rem;
+        margin-inline: auto;
+      }
+      [slot='main-footer'] {
+        border-block-start: var(--wa-border-width-s) var(--wa-border-style) var(--wa-color-surface-border);
+      }
+      [slot='footer'] {
+        --wa-color-text-link: var(--wa-color-text-quiet);
+        background-color: var(--wa-color-surface-lowered);
+        font-size: var(--wa-font-size-s);
+      }
+
+      .connected {
+        color: #00e883;
+      }
+
+      .disconnected {
+        color: #5C1109;
+      }
+    </style>
+
+    <script>
+
+        
+
+        const sectionAnchors = document.querySelectorAll("[slot*='navigation'] a[href*='#']");
+        sectionAnchors.forEach(sectionAnchor => sectionAnchor.setAttribute('data-drawer', 'close'));
+
+      
+        const drawer = document.querySelector('#settings-drawer');
+        const openButton = document.querySelector('#settings-button');
+
+        openButton.addEventListener('click', () => (drawer.open = true));
+    </script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  </body>
+</html>

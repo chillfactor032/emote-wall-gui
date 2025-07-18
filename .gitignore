@@ -1,3 +1,8 @@
+test
+.tio.tokens.json
+web/static/emotes/*
+*.bak
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

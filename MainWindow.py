@@ -7,8 +7,8 @@ from enum import Enum
 
 # PySide6 Imports
 from PySide6.QtWidgets import QApplication, QMainWindow, QStyle
-from PySide6.QtCore import QSettings, QFile, QTextStream, QStandardPaths, QSize
-from PySide6.QtGui import QPixmap, QIcon, QPalette, QColor
+from PySide6.QtCore import QSettings, QFile, QTextStream, QStandardPaths, QSize, Signal, QObject
+from PySide6.QtGui import QPixmap, QIcon, QPalette, QColor 
 
 # Import resources and UI components
 import Resources_rc
@@ -154,6 +154,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.settings.sync()
         evt.accept()
 
+class MsgQueueMonitor():
+    class Signals(QObject):
+        queue_item = Signal(dict)
+
+    def __init__(self):
+        self.signals = MsgQueueMonitor.Signals()
+    
+    
 # Start the PySide6 App
 if __name__ == "__main__":
     app = QApplication(sys.argv)

@@ -23,8 +23,8 @@ FULL_COMPILE = args.full
 OS_PLATFORM = platform.system()
 
 PYTHON_BIN = "py"
-UIC_BIN = "uic"
-RCC_BIN = "rcc"
+UIC_BIN = "pyside6-uic"
+RCC_BIN = "pyside6-rcc"
 
 if OS_PLATFORM == 'Linux':
     PYTHON_BIN = "python3"

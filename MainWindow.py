@@ -34,8 +34,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super(MainWindow, self).__init__()
         #Load UI Components
         self.setupUi(self)
-        
-        
 
         #Read Version File From Resources
         version_file = QFile(":version.json")
@@ -51,11 +49,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         #Load Settings
         self.config_dir = QStandardPaths.writableLocation(QStandardPaths.ConfigLocation)
         if(not os.path.isdir(self.config_dir)):
-            os.mkdir(self.config_dir)
+            os.makedirs(self.config_dir)
         self.ini_path = os.path.join(self.config_dir, f"{self.project_name}.ini").replace("\\", "/")
         self.settings = QSettings(self.ini_path, QSettings.IniFormat)
 
         # Variables
+        self._LEFT = -1
+        self._RIGHT = 1
         self.delay_secs = int(self.settings.value("delay_secs", "10"))
         self.emote_buffer_size = int(self.settings.value("emote_buffer_size", "15"))
         self.twitch_channel_name = self.settings.value("twitch_channel_name", "")
@@ -84,10 +84,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # Button/Menu Signals Go Here
         self.save_button.clicked.connect(self.save_clicked)
         self.preview_screen_button.clicked.connect(self.preview_button_clicked)
-        self.delay_left_button.clicked.connect(lambda : self.modify_delay(-1))
-        self.delay_right_button.clicked.connect(lambda : self.modify_delay(1))
-        self.buffer_left_button.clicked.connect(lambda : self.modify_buffer(-1))
-        self.buffer_right_button.clicked.connect(lambda : self.modify_buffer(1))
+        self.delay_left_button.clicked.connect(lambda : self.modify_delay(self._LEFT))
+        self.delay_right_button.clicked.connect(lambda : self.modify_delay(self._RIGHT))
+        self.buffer_left_button.clicked.connect(lambda : self.modify_buffer(self._LEFT))
+        self.buffer_right_button.clicked.connect(lambda : self.modify_buffer(self._RIGHT))
+        self.mode_combo.currentIndexChanged.connect(self.mode_combo_clicked)
+        self.cycle_left_button.clicked.connect(lambda : self.cycle_button_clicked(self._LEFT))
+        self.cycle_right_button.clicked.connect(lambda : self.cycle_button_clicked(self._RIGHT))
 
         #Set UI Fields
         self.stacked_widget.setCurrentIndex(0)
@@ -100,6 +103,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.display_mode = self.mode_combo.currentText()
         else:
             self.mode_combo.setCurrentIndex(mode_index)
+        self.mode_combo_clicked()
         self.save_button.setFocus()
         
         #Finally, Show the UI
@@ -110,13 +114,29 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.restoreState(window_state)
         self.show()
 
+    def cycle_button_clicked(self, direction):
+        if direction >= 0:
+            print("Cycle Right")
+        else:
+            print("Cycle Left")
+
+    def mode_combo_clicked(self):
+        self.display_mode = self.mode_combo.currentText()
+        if self.display_mode != "Auto Cycle":
+            self.delay_left_button.setDisabled(True)
+            self.delay_right_button.setDisabled(True)
+            self.delay_lcd.setDisabled(True)
+        else:
+            self.delay_lcd.setDisabled(False)
+            self.delay_left_button.setDisabled(False)
+            self.delay_right_button.setDisabled(False)
+
     def save_clicked(self):
         self.delay_secs = self.delay_lcd.intValue()
         self.emote_buffer_size = self.buffer_lcd.intValue()
         self.twitch_channel_name = self.twitch_channel_input.text()
         self.display_mode = self.mode_combo.currentText()
         self.save_fields()
-
 
     def save_fields(self):
         self.settings.setValue("delay_secs", str(self.delay_secs))
@@ -128,10 +148,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def modify_delay(self, amount=0):
         self.delay_secs += amount
+        if self.delay_secs < 1:
+            self.delay_secs = 1
         self.delay_lcd.display(str(self.delay_secs))
 
     def modify_buffer(self, amount=0):
         self.emote_buffer_size += amount
+        if self.emote_buffer_size < 1:
+            self.emote_buffer_size = 1
         self.buffer_lcd.display(str(self.emote_buffer_size))
 
     def preview_button_clicked(self):

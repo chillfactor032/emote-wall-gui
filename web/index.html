@@ -57,6 +57,7 @@
         
       </nav>
       <main class="wa-body-l">
+        <div class="wa-stack">
             <div class="wa-flank:end wa-border-radius-l wa-dark" style="background-color: var(--wa-color-surface-lowered); --content-percentage: 50%; padding: var(--wa-space-l);">
                 <div class="wa-stack" style="margin: var(--wa-space-2xl)">
                     <h2>Current Emote</h2>
@@ -76,11 +77,37 @@
                     <wa-progress-bar value="40"></wa-progress-bar>
                 </div>
                 <div class="wa-frame" style="border-radius: var(--wa-border-radius-l); max-inline-size: 80ch">
-                    <img src="static/emotes/emotesv2_34f411f644694cf6854e5bbe225f9eb6.png" style="height: 200px;"/>
+                    <img id="preview-img" src="static/emotes/emotesv2_34f411f644694cf6854e5bbe225f9eb6.png" style="height: 200px;"/>
                 </div>
             </div>
-            <wa-button variant="brand" data-drawer="close" onclick="set_connected(true);">Good</wa-button>
-            <wa-button variant="brand" data-drawer="close" onclick="set_connected(false);">Bad</wa-button>
+            <div class="wa-border-radius-l wa-dark wa-align-items-center" style="background-color: var(--wa-color-surface-lowered); padding: var(--wa-space-l);">
+                <h3 style="margin:0; width: 100%; margin: auto; text-align: center;">Emote Pool</h3>
+                <wa-carousel class="wa-align-items-center" style="width: 100%; margin: 0;" loop navigation pagination>
+                    <wa-carousel-item class="wa-align-items-center" style="text-align: center; ">
+                        <div class="wa-grid wa-align-items-center wa-gap-s" style="width: 100%; display: flex; justify-content: center; flex-wrap: wrap;">
+                            <wa-card class="wa-align-items-center" style="width: 30%; ">
+                                <img src="static/emotes/307278843.png" />
+                            </wa-card>
+                            <wa-card class="wa-align-items-center" style="width: 30%; ">
+                                <img src="static/emotes/307278843.png" />
+                            </wa-card>
+                            <wa-card class="wa-align-items-center" style="width: 30%; ">
+                                <img src="static/emotes/307278843.png" />
+                            </wa-card>
+                            <wa-card class="wa-align-items-center" style="width: 30%; ">
+                                <img src="static/emotes/307278843.png" />
+                            </wa-card>
+                            <wa-card class="wa-align-items-center" style="width: 30%; ">
+                                <img src="static/emotes/307278843.png" />
+                            </wa-card>
+                            <wa-card class="wa-align-items-center" style="width: 30%; ">
+                                <img src="static/emotes/307278843.png" />
+                            </wa-card>
+                        </div>
+                    </wa-carousel-item>
+                </wa-carousel>
+            </div>
+        </div>
       </main>
       <aside slot="aside" class="wa-desktop-only">
         <h2 class="wa-heading-m" style="text-align: center;">Upcoming Emotes</h2>
@@ -100,6 +127,13 @@
     </wa-page>
 
     <style>
+        html,
+        body {
+            min-height: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
         :root,
         .wa-light,
         .wa-dark {
@@ -180,6 +214,10 @@
 
       .disconnected {
         color: #5C1109;
+      }
+
+      wa-c {
+        text-align: center;
       }
     </style>
 

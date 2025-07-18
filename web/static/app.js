@@ -12,6 +12,11 @@ function set_connected(connected){
     }
 }
 
+function set_preview_img(src){
+    let img = document.querySelector("#preview-img");
+    img.src = src;
+}
+
 function toast_success(msg){
     Toastify({
         text: msg,
@@ -63,8 +68,7 @@ socket.on("disconnect", () => {
 
 socket.on("preview", (data) => {
     console.log("Event: Preview Img Update");
-    //let img = document.querySelector("#preview-img");
-    //img.src = data.path;
+    set_preview_img(data.path);
     toast_info("Preview Event");
 });
 

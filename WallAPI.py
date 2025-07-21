@@ -123,20 +123,15 @@ async def edit_settings(request: web.Request):
     _mode = request.query.get("mode", "").strip()
     _pool_size = request.query.get("pool_size", 0)
     _mode = request.query.get("mode", "").strip().lower()
-    print(f"Received mode: {_mode}")
 
     if _mode == "auto":
         display_mode = DisplayMode.AUTO
-        print(f"1set mode: {display_mode}")
     elif _mode == "manual":
         display_mode = DisplayMode.MANUAL
-        print(f"2set mode: {display_mode}")
     elif _mode == "last":
-        print(f"3matched mode last: {display_mode}")
         display_mode = DisplayMode.LAST
-        print(f"3set mode: {display_mode}")
     else:
-        print("Invalid mode received")
+        pass
 
     try:
         _secs = int(_secs)
@@ -162,6 +157,11 @@ def save_config():
     config["wallapi"]["pool_size"] = str(pool_size)
     with open(args.config, 'w') as config_file:
         config.write(config_file)
+
+async def send_emote_pool():
+    await sio.emit("emote_pool", {
+        "emotes": emote_pool
+    })
 
 async def send_settings():
     await sio.emit("settings", {

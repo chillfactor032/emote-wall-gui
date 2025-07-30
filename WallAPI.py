@@ -259,7 +259,7 @@ async def main():
     scheduler.start()
     runner = web.AppRunner(app)
     await runner.setup()
-    site = web.TCPSite(runner, '0.0.0.0', 80)
+    site = web.TCPSite(runner, host, port)
     await site.start()
     await asyncio.Event().wait()
 

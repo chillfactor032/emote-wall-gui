@@ -256,7 +256,9 @@ async def tick():
     print(f"Picking New Emote: {emote}")
 
     if emote is not None:
-        matrix.show_img(os.path.join(emote_web_dir,emote))
+        emote_path = os.path.join(emote_web_dir,emote)
+        print(f"Showing emote: {emote_path}")
+        matrix.show_img(emote_path)
         await send_cur_emote(emote)
     tick_cnt = 0
 

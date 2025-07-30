@@ -54,7 +54,7 @@ try:
     port = int(config["wallapi"].get("http_port", 8080))
     matrix_width = int(config["ledmatrix"].get("width", 64))
     matrix_height = int(config["ledmatrix"].get("height", 64))
-    matrix_brightness = int(config["ledmatrix"].get("brightness", 0.5))
+    matrix_brightness = float(config["ledmatrix"].get("brightness", 0.5))
 except ValueError as e:
     LOGGER.error("Port should be an int")
     LOGGER.error(str(e))

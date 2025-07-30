@@ -4,18 +4,32 @@ import os
 import sys
 import re
 import logging
+import asyncio
+import time
+import random
 from enum import Enum
-from aiohttp import web
 import socketio
 import requests
+from aiohttp import web
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
-logging.basicConfig(level=logging.WARN)
+logging.basicConfig(level=logging.INFO)
+logging.getLogger('apscheduler.executors.default').propagate = False
 LOGGER: logging.Logger = logging.getLogger(__name__)
 
 class DisplayMode(Enum):
     AUTO = 1
     MANUAL = 2
     LAST = 3
+
+
+class Emote():
+    def __init__(self, name, chatter_name="", chatter_color=""):
+        self.name = name
+        self.timestamp = time.time()
+        self.chatter_name = chatter_name
+        self.chatter_color = chatter_color
+
 
 # Command line args 
 parser = argparse.ArgumentParser(
@@ -59,6 +73,8 @@ else:
         sys.exit(2)
 
 #Settings
+emote_dir = "web/static/emotes"
+emote_web_dir = "static/emotes"
 display_mode = DisplayMode.AUTO
 
 if config["wallapi"].get("display_mode", "AUTO").upper() in DisplayMode.__members__:
@@ -76,10 +92,10 @@ except Exception:
 
 emote_pool = []
 
+scheduler = AsyncIOScheduler()
 sio = socketio.AsyncServer(async_mode='aiohttp')
 app = web.Application()
 sio.attach(app)
-
 
 async def index(request):
     with open('web/index.html') as f:
@@ -111,17 +127,27 @@ async def emote_add(request: web.Request):
     else:
         return web.Response(text=f"Invalid emote content type {r.headers['Content-Type']}", status=500, content_type='text/html')
     if not os.path.exists(os.path.join(emote_dir, filename)):
-        with open(os.path.join(emote_dir, filename), 'wb') as f:
+        with open(os.path.join(emote_dir, filename).replace("\\", "/"), 'wb') as f:
             f.write(r.content)
-    await sio.emit('preview', {'path': "static/emotes/"+filename})
+    add_emote_pool(filename)
     return web.Response(text=f"Adding emote with id {emote_id} to pool", status=200, content_type='text/html')
+
+def add_emote_pool(emote_name):
+    global emote_pool
+    if emote_name in emote_pool:
+        emote_pool.remove(emote_name)
+    emote_pool.append(emote_name)
+
+    while len(emote_pool) > pool_size:
+        # Remove oldest Emote
+        emote_pool.pop(0)
 
 # Set Settings
 async def edit_settings(request: web.Request):
     global display_mode, delay_secs, pool_size
-    _secs = request.query.get("delay_secs", 0)
+    _secs = request.query.get("delay_secs", 1)
     _mode = request.query.get("mode", "").strip()
-    _pool_size = request.query.get("pool_size", 0)
+    _pool_size = request.query.get("pool_size", 1)
     _mode = request.query.get("mode", "").strip().lower()
 
     if _mode == "auto":
@@ -158,6 +184,9 @@ def save_config():
     with open(args.config, 'w') as config_file:
         config.write(config_file)
 
+async def send_cur_emote(filename):
+    await sio.emit('preview', {'path': os.path.join(emote_web_dir,filename)})
+
 async def send_emote_pool():
     await sio.emit("emote_pool", {
         "emotes": emote_pool
@@ -189,6 +218,50 @@ filter_pattern = re.compile("[^a-zA-Z0-9_]")
 def filter_safe(value):
     return filter_pattern.sub("", value)
 
-if __name__ == '__main__':
-    web.run_app(app, host=host, port=port)
+# Get Random Emote from pool
+# thats not current emote unless its the only option
+def get_random_emote(cur_emote):
+    global emote_pool
+    if len(emote_pool) == 1:
+        return emote_pool[0]
+    emote = cur_emote
+    while emote == cur_emote:
+        emote = random.choice(emote_pool)
+    return emote
 
+tick_cnt = 0
+current_emote = None
+
+async def tick():
+    global emote_pool, tick_cnt
+    print(f"Tick: {tick_cnt}")
+    if len(emote_pool) == 0:
+        return
+    
+    tick_cnt += 1
+    if tick_cnt < delay_secs:
+        return
+
+    emote = None
+    if display_mode == DisplayMode.AUTO:
+        emote = get_random_emote(current_emote)
+    elif display_mode == DisplayMode.LAST:
+        emote = emote_pool.pop()
+
+    print(f"Picking New Emote: {emote}")
+
+    if emote is not None:
+        await send_cur_emote(emote)
+    tick_cnt = 0
+
+async def main():
+    scheduler.add_job(tick, "interval", seconds=1)
+    scheduler.start()
+    runner = web.AppRunner(app)
+    await runner.setup()
+    site = web.TCPSite(runner, '0.0.0.0', 80)
+    await site.start()
+    await asyncio.Event().wait()
+
+if __name__ == '__main__':
+    asyncio.run(main())

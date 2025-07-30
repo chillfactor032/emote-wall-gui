@@ -12,6 +12,7 @@ import socketio
 import requests
 from aiohttp import web
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from LEDMatrix import Matrix
 
 logging.basicConfig(level=logging.INFO)
 logging.getLogger('apscheduler.executors.default').propagate = False
@@ -51,6 +52,9 @@ try:
     emote_dir = "web/static/emotes"
     host = config["wallapi"].get("http_host", "0.0.0.0")
     port = int(config["wallapi"].get("http_port", 8080))
+    matrix_width = int(config["ledmatrix"].get("width", 64))
+    matrix_height = int(config["ledmatrix"].get("height", 64))
+    matrix_brightness = int(config["ledmatrix"].get("brightness", 0.5))
 except ValueError as e:
     LOGGER.error("Port should be an int")
     LOGGER.error(str(e))
@@ -92,6 +96,7 @@ except Exception:
 
 emote_pool = []
 
+matrix = Matrix(matrix_width,matrix_height,brightness=matrix_brightness)
 scheduler = AsyncIOScheduler()
 sio = socketio.AsyncServer(async_mode='aiohttp')
 app = web.Application()
@@ -251,6 +256,7 @@ async def tick():
     print(f"Picking New Emote: {emote}")
 
     if emote is not None:
+        matrix.show_img(emote)
         await send_cur_emote(emote)
     tick_cnt = 0
 
@@ -262,6 +268,7 @@ async def main():
     site = web.TCPSite(runner, host, port)
     await site.start()
     await asyncio.Event().wait()
+    matrix.stop_gif()
 
 if __name__ == '__main__':
     asyncio.run(main())

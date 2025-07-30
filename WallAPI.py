@@ -123,10 +123,11 @@ async def emote_add(request: web.Request):
         LOGGER.error(str(e))
         return web.Response(text="Problem downloading emote", status=500, content_type='text/html')
     filename = ""
-    if r.headers["Content-Type"] == "image/png":
+    content_type = r.headers.get("Content-Type", "image/png")
+    if content_type == "image/png":
         filename = emote_id+".png"
         print("PNG Emote")
-    elif r.headers["Content-Type"] == "image/gif":
+    elif content_type == "image/gif":
         filename = emote_id+".gif"
         print("Gif Emote")
     else:
@@ -239,7 +240,6 @@ current_emote = None
 
 async def tick():
     global emote_pool, tick_cnt
-    print(f"Tick: {tick_cnt}")
     if len(emote_pool) == 0:
         return
     

@@ -84,8 +84,8 @@ def main() -> None:
         bot_id = config["twitchbot"].get("bot_id")
         owner_id = config["twitchbot"].get("owner_id", None)
         prefix = config["twitchbot"].get("prefix", "!")
-        wall_api_host = config["twitchbot"].get("wall_api_host", "127.0.0.1")
-        wall_api_port = config["twitchbot"].get("wall_api_port", 80)
+        wall_api_host = config["twitchbot"].get("host", "127.0.0.1")
+        wall_api_port = config["wallapi"].get("http_port", 80)
 
     except Exception as e:
         LOGGER.error("Could not parse config file: \n\t" + str(e))

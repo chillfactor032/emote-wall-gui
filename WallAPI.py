@@ -56,7 +56,7 @@ try:
     matrix_height = int(config["ledmatrix"].get("height", 64))
     matrix_brightness = float(config["ledmatrix"].get("brightness", 0.5))
 except ValueError as e:
-    LOGGER.error("Port should be an int")
+    LOGGER.error("Error parsing config file")
     LOGGER.error(str(e))
     sys.exit(2)
 except Exception as e:
